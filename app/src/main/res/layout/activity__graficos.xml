@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_Graficos">
+
+    <EditText
+        android:id="@+id/atualizacao"
+        android:layout_width="229dp"
+        android:layout_height="59dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/Atualizacao"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="14dp" />
+
+    <EditText
+        android:id="@+id/PesoPerfil"
+        android:layout_width="229dp"
+        android:layout_height="59dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/PesoPerfil"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="73dp" />
+
+    <EditText
+        android:id="@+id/AlturaPerfil"
+        android:layout_width="229dp"
+        android:layout_height="59dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/AlturaPerfil"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="132dp" />
+
+    <EditText
+        android:id="@+id/pressaoPerfil"
+        android:layout_width="229dp"
+        android:layout_height="59dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/PressaoPerfil"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="191dp" />
+    <EditText
+        android:id="@+id/peso"
+        android:layout_width="66dp"
+        android:layout_height="133dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/Peso"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+
+    <EditText
+        android:id="@+id/mesAno"
+        android:layout_width="142dp"
+        android:layout_height="67dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/MesAno"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <ImageView
+        android:id="@+id/logo_app"
+        android:layout_width="276dp"
+        android:layout_height="225dp"
+        android:src="@drawable/grafic"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="243dp" />
+</android.support.constraint.ConstraintLayout>

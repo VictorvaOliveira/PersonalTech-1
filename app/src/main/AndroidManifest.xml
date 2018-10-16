@@ -21,7 +21,9 @@
             android:label="@string/title_activity_feed_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Perfil" />
-        <activity android:name=".Configuracao"></activity>
+        <activity android:name=".Configuracao" />
+        <activity android:name=".activity_Exercicio" />
+        <activity android:name=".activity_Graficos"></activity>
     </application>
 
 </manifest>

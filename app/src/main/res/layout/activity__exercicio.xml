@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_Exercicio">
+
+    <ImageView
+        android:id="@+id/image_Exercicio"
+        android:layout_width="260dp"
+        android:layout_height="227dp"
+        android:src="@drawable/abdominal"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="111dp"
+
+        />
+
+    <EditText
+        android:id="@+id/Title_Exercicio"
+        android:layout_width="0dp"
+        android:layout_height="39dp"
+        android:background="@drawable/bordinha"
+        android:fontFamily="sans-serif"
+        android:hint="@string/Title_Exercicio"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="106dp"
+        tools:layout_editor_absoluteY="1dp" />
+
+    <EditText
+        android:id="@+id/Descricao_Exercicio"
+        android:layout_width="0dp"
+        android:layout_height="39dp"
+        android:background="@drawable/bordinha"
+        android:fontFamily="sans-serif"
+        android:hint="@string/Descricao_Exercicio"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="52dp" />
+
+    <Chronometer
+        android:id="@+id/chronometer1"
+        android:layout_width="61dp"
+        android:layout_height="58dp"
+
+        android:gravity="top"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:background="@drawable/bordinha"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="351dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="69dp"
+        android:layout_height="65dp"
+        android:background="@drawable/Start_icon"
+
+        android:onClick="startChronometer"
+
+        tools:layout_editor_absoluteX="237dp"
+        tools:layout_editor_absoluteY="410dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="69dp"
+        android:layout_height="65dp"
+
+        android:background="@drawable/Stop_icon"
+        android:onClick="stopChronometer"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="409dp" />
+
+</android.support.constraint.ConstraintLayout>

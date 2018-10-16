@@ -8,10 +8,17 @@
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
+    <ImageView
+        android:id="@+id/logo_app"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:src="@drawable/logo_app"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="0dp" />
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
-        android:layout_height="47dp"
+        android:layout_height="39dp"
         android:background="@drawable/bordinha"
         android:fontFamily="sans-serif"
         android:hint="@string/Login_email"
@@ -33,6 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="39dp"
         android:hint="@string/Login_password"
+        android:fontFamily="sans-serif"
         android:id="@+id/password"
         android:inputType="textPassword"
         android:paddingLeft="30dip"
@@ -53,16 +61,17 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
+        android:id="@+id/button"
         android:layout_width="88dp"
         android:layout_height="0dp"
-        android:hint="@string/botao_login"
         android:background="@drawable/botao_personalizado"
-        android:id="@+id/button"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
+        android:hint="@string/botao_login"
+        android:onClick="mudarTela"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="98dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        tools:layout_constraintRight_creator="1" />
 </android.support.constraint.ConstraintLayout>

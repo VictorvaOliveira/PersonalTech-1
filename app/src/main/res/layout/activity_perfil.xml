@@ -1,34 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--
+        INICIO CAMPO: NOME
+    -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome:"/>
-        <EditText android:id="@+id/nome"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Endereço:"/>
-        <EditText android:id="@+id/end"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <Button android:id="@+id/salvar"
-        android:layout_width="fill_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:text="Salvar"/>
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Android PDM"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <!--
+        FIM CAMPO: NOME
+    -->
+    <!--
+        INICIO CAMPO: EMAIL
+    -->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="87dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="androidstudio@pdm.com"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <!--
+        FIM CAMPO: EMAIL
+    -->
+    <!--
+    INICIO CAMPO: NOME PERSONAL TRAINER
+    -->
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="157dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do personal trainer"
+            android:textSize="18sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:text="Fulano de tal"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <!--
+        FIM CAMPO: PERSONAL TRAINER
+    -->
+    <!--
+    INICIO CAMPO: BOTOES
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Salvar"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="141dp"
+            android:layout_marginLeft="40dp"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Cancelar"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="202dp"
+            tools:layout_editor_absoluteY="141dp" />
+    </LinearLayout>
+    <!--
+        FIM CAMPO: BOTOES
+    -->
 </LinearLayout>

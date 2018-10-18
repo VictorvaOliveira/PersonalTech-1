@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity_Exercicio">
 
-    <ImageView
-        android:id="@+id/image_Exercicio"
-        android:layout_width="260dp"
-        android:layout_height="227dp"
-        android:src="@drawable/abdominal"
-        tools:layout_editor_absoluteX="62dp"
-        tools:layout_editor_absoluteY="111dp"
 
-        />
-
-    <EditText
+    <TextView
         android:id="@+id/Title_Exercicio"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:background="@drawable/bordinha"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="100dp"
+
+        android:layout_marginTop="5dp"
+
         android:fontFamily="sans-serif"
         android:hint="@string/Title_Exercicio"
         android:paddingLeft="30dip"
@@ -29,11 +24,15 @@
         tools:layout_editor_absoluteX="106dp"
         tools:layout_editor_absoluteY="1dp" />
 
-    <EditText
+
+    <TextView
         android:id="@+id/Descricao_Exercicio"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:background="@drawable/bordinha"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="15dp"
+
+
         android:fontFamily="sans-serif"
         android:hint="@string/Descricao_Exercicio"
         android:paddingLeft="30dip"
@@ -42,39 +41,54 @@
         tools:layout_editor_absoluteX="63dp"
         tools:layout_editor_absoluteY="52dp" />
 
-    <Chronometer
-        android:id="@+id/chronometer1"
-        android:layout_width="61dp"
-        android:layout_height="58dp"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="294dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        android:gravity="top"
-        android:padding="10dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:background="@drawable/bordinha"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="351dp" />
+        <ImageView
+            android:id="@+id/grafico"
+            android:layout_width="match_parent"
+            android:layout_height="184dp"
 
+
+            android:src="@drawable/abdominal" />
+
+
+        <Chronometer
+            android:id="@+id/chronometer1"
+            android:layout_width="61dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginTop="5dp"
+
+            android:background="@drawable/bordinha"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <Button
-        android:id="@+id/button1"
-        android:layout_width="69dp"
-        android:layout_height="65dp"
-        android:background="@drawable/Start_icon"
+    android:id="@+id/button1"
 
-        android:onClick="startChronometer"
+    android:layout_width="70dp"
+    android:layout_height="45dp"
+    android:layout_gravity="center"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="160dp"
+    android:layout_marginTop="15dp"
+    android:layout_weight="1"
+    android:background="@drawable/start_icon" /></LinearLayout>
 
-        tools:layout_editor_absoluteX="237dp"
-        tools:layout_editor_absoluteY="410dp" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="69dp"
-        android:layout_height="65dp"
 
-        android:background="@drawable/Stop_icon"
-        android:onClick="stopChronometer"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="409dp" />
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

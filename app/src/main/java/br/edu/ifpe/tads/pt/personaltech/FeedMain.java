@@ -96,4 +96,12 @@ public class FeedMain extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void irExercicio(View view){
+        Intent it = new Intent(this, activity_Exercicio.class);
+        startActivity(it);
+    }
+    public void irGrafico(View view){
+        Intent it = new Intent(this, GraficosPerfil.class);
+        startActivity(it);
+    }
 }

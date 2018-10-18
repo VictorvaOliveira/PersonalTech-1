@@ -90,5 +90,9 @@
     <string name="MesAno">Mês/Ano</string>
     <string name="PesoPerfil">Peso: 53.7 </string>
     <string name="AlturaPerfil">Altura: 1.70</string>
-    <string name="PressaoPerfil">13 por 9</string>
+    <string name="PressaoPerfil">Pressão: 13 por 9</string>
+    <string name="AvisoGrafico">Gráfico Peso/IMC</string>
+    <string name="AvisoExercicio">Exercícios</string>
+    <string name="Nivel">Nível: Iniciante</string>
+    <string name="TempoMedio">Tempo médio: 5 minutos</string>
 </resources>

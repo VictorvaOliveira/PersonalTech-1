@@ -13,6 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,7 +93,16 @@ public class FeedMain extends AppCompatActivity
             Intent it = new Intent(this, Configuracao.class);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
-
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (user != null){
+                mAuth.signOut();
+                this.finish();
+                Intent it = new Intent(this, MainActivity.class);
+                startActivity(it);
+            }else{
+                Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

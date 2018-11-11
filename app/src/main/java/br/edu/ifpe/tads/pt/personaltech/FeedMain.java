@@ -2,6 +2,7 @@ package br.edu.ifpe.tads.pt.personaltech;
 
 import android.content.Intent;
 import android.os.Bundle;
+import com.google.firebase.database.*;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "852494043331-irnf2g7igq67cjsvbnfmj658nl4cgbia.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ifpe.tads.pt.personaltech",
+            "certificate_hash": "6c0147d4bf2c347d38fe6d3a3e3683b3fbd0b1af"
+          }
+        },
+        {
           "client_id": "852494043331-24sdp11ivp6c9ajkoggmlafn1e4mrn5g.apps.googleusercontent.com",
           "client_type": 3
         }

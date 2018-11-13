@@ -10,6 +10,7 @@ public class activity_Exercicio extends AppCompatActivity {
    private Chronometer cronometro1;
    private boolean running;
    private long pauseOffSet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

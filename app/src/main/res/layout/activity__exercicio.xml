@@ -30,7 +30,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
 
 
         android:fontFamily="sans-serif"
@@ -44,7 +44,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="294dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="00dp"
+        android:layout_marginTop="00dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -52,48 +53,62 @@
             android:id="@+id/grafico"
             android:layout_width="match_parent"
             android:layout_height="184dp"
-
+            android:layout_marginTop="03dp"
 
             android:src="@drawable/abdominal" />
 
-        <Chronometer
-            android:id="@+id/chronometer1"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:background="@drawable/bordinha"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:textSize="30sp" />
+            android:orientation="horizontal">
+            <Button
+
+                android:onClick="StartChronometer1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="00dp"
+                android:layout_marginLeft="00dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_play" />
+            <Chronometer
+                android:id="@+id/chronometer1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:background="@drawable/bordinha"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:onClick="StopChronometer"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/ic_pause"/></LinearLayout>
 
 
     </LinearLayout>
 
+
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
     <Button
-
-    android:onClick="StartChronometer1"
-    android:layout_width="70dp"
-    android:layout_height="45dp"
-    android:layout_gravity="center"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="80dp"
-    android:layout_marginTop="15dp"
-    android:layout_weight="1"
-    android:background="@drawable/start_icon" />
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="45dp"
-        android:onClick="StopChronometer"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="80dp"
-        android:background="@drawable/stop_icon"/></LinearLayout>
-
+    android:layout_marginBottom="05dp"
+        android:layout_marginLeft="158dp"
+    android:background="@drawable/ic_finish"
+    /></LinearLayout>
 
 
 </LinearLayout>

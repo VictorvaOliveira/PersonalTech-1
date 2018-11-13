@@ -6,10 +6,11 @@ public class Exercicio {
     private String descricao;
     private String imagemId;
     private String nivel;
-
+    private String tipo;
     public Exercicio(String nome, String descricao, String imagemId){
 
     }
+
     public String getNome() {
         return nome;
     }
@@ -40,5 +41,14 @@ public class Exercicio {
 
     public void setNivel(String nivel) {
         this.nivel = nivel;
+    }
+
+    public String getTipo(){ return tipo;}
+
+    public void setTipo(String tipo){this.tipo =tipo;}
+
+    @Override
+    public String toString() {
+        return nome;
     }
 }

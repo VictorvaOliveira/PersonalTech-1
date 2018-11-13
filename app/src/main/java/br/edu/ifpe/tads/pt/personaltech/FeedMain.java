@@ -2,7 +2,11 @@ package br.edu.ifpe.tads.pt.personaltech;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
+
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -14,14 +18,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.edu.ifpe.tads.pt.personaltech.model.Exercicio;
+
 public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    // Criei uma LISTVIEW  aleatória por causa da videoaula, se não usar, eu comentarei.
+    //ListView listExercicio;
+    //TextView nivel, titulo, tipo;
+    FirebaseDatabase firebaseDatabase ;
+    private List<Exercicio> listExercicio = new ArrayList<Exercicio>();
+    private ArrayAdapter<Exercicio> arrayAdapterExercicio;
     private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +46,16 @@ public class FeedMain extends AppCompatActivity
         setContentView(R.layout.activity_feed_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // ABAIXO SERÁ A INDEX + VARIAVEL (MARCOS // LEMBRAR QUE É MEU)
+           //nivel = (TextView)findViewById(R.id.NivelExercicio);
+          // titulo = (TextView)findViewById(R.id.AvisoExercicio);
+          // tipo = (TextView)findViewById(R.id.TipoExercicio);
+
+           inicializarFirebase();
+           eventoDatabase();
+           // FIM DO CÓDIGO DE MARCOS ////
+
 
 //        NÃO MEXER DE FORMA ALGUMA NESSE COMENTÁRIO
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -50,6 +77,41 @@ public class FeedMain extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private void eventoDatabase() {
+       mDatabase.child("Exercicio").addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+          listExercicio.clear();
+
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
+
+
+    }
+
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(FeedMain.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabase = firebaseDatabase.getReference();
+    }
+              /*ABAIXO, METODO DE CREATE DATABASSE (PARA ESTUDO)
+               *
+                *
+                * public boolean createExercicio(){
+                * Exercicio e = new Exercicio();
+                * e.setTitulo("Fulaninho");
+                * e.setTipo("Perna");
+                * e.setNivel("Facil");
+                * mDatabase.child("Exercicio").child(e.getID).setvalue(e);
+                * return true;
+                *
+                * }
+                * */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

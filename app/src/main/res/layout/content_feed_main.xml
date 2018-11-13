@@ -9,119 +9,79 @@
     android:orientation="vertical"
     tools:showIn="@layout/app_bar_feed_main">
 
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardview01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="50dp"
-        android:background="@drawable/abdominal"
-
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@drawable/bordinha"
-            android:layout_marginTop="20dp"
-            android:onClick="irExercicio"
-            >
-
-
-            <TextView
-                android:id="@+id/AvisoExercicio"
-                android:layout_width="fill_parent"
-                android:layout_height="59dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="100dp"
-                android:fontFamily="sans-serif"
-                android:hint="@string/AvisoExercicio"
-                android:paddingLeft="30dip"
-                android:paddingRight="26dip"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="73dp"
-                tools:layout_editor_absoluteY="14dp" />
-
-            <TextView
-                android:id="@+id/Nivel"
-                android:layout_width="fill_parent"
-                android:layout_height="59dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="90dp"
-                android:layout_marginBottom="15dp"
-                android:fontFamily="sans-serif"
-                android:hint="@string/Nivel"
-                android:paddingLeft="30dip"
-                android:paddingRight="26dip"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="73dp"
-                tools:layout_editor_absoluteY="14dp" />
-            <TextView
-                android:id="@+id/TempoMedio"
-                android:layout_width="fill_parent"
-                android:layout_height="59dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="40dp"
-                android:fontFamily="sans-serif"
-                android:hint="@string/TempoMedio"
-                android:paddingLeft="30dip"
-                android:paddingRight="26dip"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="73dp"
-                tools:layout_editor_absoluteY="14dp" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
 
-            <TextView
-                android:id="@+id/AvisoGrafico"
-                android:layout_width="fill_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="sans-serif"
-                android:hint="@string/AvisoGrafico"
-                android:paddingLeft="30dip"
-                android:paddingRight="26dip"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="73dp"
-                tools:layout_editor_absoluteY="14dp" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/abdominal"
+            android:padding="30dp"
+            android:layout_marginLeft="30dp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:onClick="irGrafico"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/bordinha"
+                android:onClick="irExercicio"
+                android:orientation="vertical">
 
-                >
 
-                <ImageView
-                    android:id="@+id/grafico"
-                    android:layout_width="380dp"
-                    android:layout_height="500dp"
-                    android:src="@drawable/grafic"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="243dp" />
+                <TextView
+                    android:id="@+id/AvisoExercicio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="59dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/AvisoExercicio"
+                    android:paddingLeft="30dip"
+                    android:paddingRight="26dip"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="73dp"
+                    tools:layout_editor_absoluteY="14dp" />
+
+                <TextView
+                    android:id="@+id/NivelExercicio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="59dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/Nivel"
+                    android:paddingLeft="30dip"
+                    android:paddingRight="26dip"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="73dp"
+                    tools:layout_editor_absoluteY="14dp" />
+
+                <TextView
+                    android:id="@+id/TipoExercicio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="59dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/TempoMedio"
+                    android:paddingLeft="30dip"
+                    android:paddingRight="26dip"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="73dp"
+                    tools:layout_editor_absoluteY="14dp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
+
     </ScrollView>
 </LinearLayout>

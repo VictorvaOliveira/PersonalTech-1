@@ -7,8 +7,17 @@ public class Exercicio {
     private String imagemId;
     private String nivel;
     private String tipo;
-    public Exercicio(String nome, String descricao, String imagemId){
 
+    public Exercicio(){
+
+    }
+
+    public Exercicio(String nome, String descricao, String imagemId, String tipo, String nivel){
+        this.nome = nome;
+        this.descricao = descricao;
+        this.imagemId = imagemId;
+        this.tipo = tipo;
+        this.nivel = nivel;
     }
 
     public String getNome() {

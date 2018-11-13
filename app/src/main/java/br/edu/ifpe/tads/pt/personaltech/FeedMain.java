@@ -49,9 +49,6 @@ public class FeedMain extends AppCompatActivity
     //    Recuperando dados do sharedPreferences
     SharedPreferences prefs;
     String emailLogin;
-    //    Variaveis para o Firebase
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,16 +199,9 @@ public class FeedMain extends AppCompatActivity
         startActivity(it);
     }
 
-    //  FUNÇÕES VOLTADAS PARA CARREGAMENTO DE DADOS
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(FeedMain.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-    }
-
     private void dadosUsuario(String emailLogin) {
         Query consultarUsuario;
-        consultarUsuario = databaseReference.child("Aluno").child("aluno01").child("email")
+        consultarUsuario = mDatabase.child("Aluno").child("aluno01").child("email")
                 .equalTo("vvao@a.recife.ifpe.edu.br");
 
         consultarUsuario.addValueEventListener(new ValueEventListener() {

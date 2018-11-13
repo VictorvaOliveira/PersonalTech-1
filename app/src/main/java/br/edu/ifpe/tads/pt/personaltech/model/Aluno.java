@@ -4,11 +4,26 @@ import java.util.Date;
 
 public class Aluno {
 
+    private int id;
     private String nome;
     private String sexo;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String email;
     private String telefone;
+
+    public Aluno(){
+
+    }
+
+    public Aluno(int id, String nome, String sexo, String dataNascimento,
+                 String email, String telefone){
+        this.id = id;
+        this.nome = nome;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.telefone = telefone;
+    }
 
     public String getNome() {
         return nome;
@@ -26,11 +41,11 @@ public class Aluno {
         this.sexo = sexo;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

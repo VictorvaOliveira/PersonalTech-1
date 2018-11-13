@@ -1,8 +1,13 @@
 package br.edu.ifpe.tads.pt.personaltech;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
+
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -14,15 +19,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import br.edu.ifpe.tads.pt.personaltech.model.Aluno;
+
 public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    //    Inicializando campos
+    TextView nomeUsuario;
+    TextView emailUsuario;
+    //    Recuperando dados do sharedPreferences
+    SharedPreferences prefs;
+    String emailLogin;
+    //    Variaveis para o Firebase
+    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,15 +47,15 @@ public class FeedMain extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        NÃO MEXER DE FORMA ALGUMA NESSE COMENTÁRIO
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        //        NÃO MEXER DE FORMA ALGUMA NESSE COMENTÁRIO
+        //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //        fab.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View view) {
+        //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        //                        .setAction("Action", null).show();
+        //            }
+        //        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,6 +65,13 @@ public class FeedMain extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //      Recuperando email do usuário logado
+        prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
+        emailLogin = prefs.getString("emailUsuario", "");
+        //      Funções de preenchimento de dados no Feed
+        inicializarCampos();
+        inicializarFirebase();
+        dadosUsuario(emailLogin);
     }
 
     @Override
@@ -97,12 +121,12 @@ public class FeedMain extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseUser user = mAuth.getCurrentUser();
-            if (user != null){
+            if (user != null) {
                 mAuth.signOut();
                 this.finish();
                 Intent it = new Intent(this, MainActivity.class);
                 startActivity(it);
-            }else{
+            } else {
                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
             }
         }
@@ -111,12 +135,54 @@ public class FeedMain extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void irExercicio(View view){
+
+    public void irExercicio(View view) {
         Intent it = new Intent(this, activity_Exercicio.class);
         startActivity(it);
     }
-    public void irGrafico(View view){
+
+    public void irGrafico(View view) {
         Intent it = new Intent(this, GraficosPerfil.class);
         startActivity(it);
     }
+
+    //  FUNÇÕES VOLTADAS PARA CARREGAMENTO DE DADOS
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(FeedMain.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabase = firebaseDatabase.getReference();
+    }
+
+    private void inicializarCampos() {
+        nomeUsuario = (TextView) findViewById(R.id.nomeUsuarioFeed);
+        emailUsuario = (TextView) findViewById(R.id.emailUsuarioFeed);
+    }
+
+    private void dadosUsuario(String emailLogin) {
+        Query consultarUsuario;
+
+        consultarUsuario = mDatabase.child("Aluno").child("email").equalTo(emailLogin);
+
+        consultarUsuario.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    Aluno aluno = dataSnapshot.getValue(Aluno.class);
+                    preencherNavHeader(aluno.getNome(), aluno.getEmail());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void preencherNavHeader(String nome, String email) {
+        nomeUsuario.setText(nome);
+        emailUsuario.setText(email);
+    }
+
+    ;
 }

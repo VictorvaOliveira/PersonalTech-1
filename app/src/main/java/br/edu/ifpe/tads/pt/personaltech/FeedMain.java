@@ -37,12 +37,12 @@ import br.edu.ifpe.tads.pt.personaltech.model.Aluno;
 public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     // Criei uma LISTVIEW  aleatória por causa da videoaula, se não usar, eu comentarei.
-    //ListView listExercicio;
+    ListView lista;
     //TextView nivel, titulo, tipo;
     FirebaseDatabase firebaseDatabase ;
     private List<Exercicio> listExercicio = new ArrayList<Exercicio>();
     private ArrayAdapter<Exercicio> arrayAdapterExercicio;
-    private DatabaseReference mDatabase;
+    private DatabaseReference databaseReference;
     //    Inicializando campos
     TextView nomeUsuario;
     TextView emailUsuario;
@@ -60,7 +60,7 @@ public class FeedMain extends AppCompatActivity
            //nivel = (TextView)findViewById(R.id.NivelExercicio);
           // titulo = (TextView)findViewById(R.id.AvisoExercicio);
           // tipo = (TextView)findViewById(R.id.TipoExercicio);
-
+          lista=(ListView)findViewById(R.id.listaExercicio);
            inicializarFirebase();
            eventoDatabase();
            // FIM DO CÓDIGO DE MARCOS ////
@@ -92,27 +92,13 @@ public class FeedMain extends AppCompatActivity
         dadosUsuario(emailLogin);
     }
 
-    private void eventoDatabase() {
-       mDatabase.child("Exercicio").addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-          listExercicio.clear();
-
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-           }
-       });
 
 
-    }
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(FeedMain.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabase = firebaseDatabase.getReference();
+        databaseReference = firebaseDatabase.getReference();
     }
               /*ABAIXO, METODO DE CREATE DATABASSE (PARA ESTUDO)
                *
@@ -201,7 +187,7 @@ public class FeedMain extends AppCompatActivity
 
     private void dadosUsuario(String emailLogin) {
         Query consultarUsuario;
-        consultarUsuario = mDatabase.child("Aluno").child("aluno01").child("email")
+        consultarUsuario = databaseReference.child("Aluno").child("aluno01").child("email")
                 .equalTo("vvao@a.recife.ifpe.edu.br");
 
         consultarUsuario.addValueEventListener(new ValueEventListener() {
@@ -228,6 +214,25 @@ public class FeedMain extends AppCompatActivity
         nomeUsuario.setText(nome);
         emailUsuario.setText(email);
     }
+    private void eventoDatabase() {
+        databaseReference.child("Exercicio").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listExercicio.clear();
+                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    Exercicio e = objSnapshot.getValue(Exercicio.class);
+                    listExercicio.add(e);
+                }
+                arrayAdapterExercicio = new ArrayAdapter<Exercicio>(FeedMain.this,android.R.layout.simple_list_item_1,listExercicio);
+                lista.setAdapter(arrayAdapterExercicio);
+            }
 
-    ;
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 }

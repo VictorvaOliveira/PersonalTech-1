@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         pswd = (EditText) findViewById(R.id.password);
         emailDeLogin  = "EMAIL_LOGIN";
         editor = getSharedPreferences(emailDeLogin, MODE_PRIVATE).edit();
+
     }
 
     /**

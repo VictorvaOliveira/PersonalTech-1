@@ -1,6 +1,7 @@
 package br.edu.ifpe.tads.pt.personaltech;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.firebase.FirebaseApp;
@@ -31,6 +32,8 @@ import java.util.List;
 
 import br.edu.ifpe.tads.pt.personaltech.model.Exercicio;
 
+import br.edu.ifpe.tads.pt.personaltech.model.Aluno;
+
 public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     // Criei uma LISTVIEW  aleatória por causa da videoaula, se não usar, eu comentarei.
@@ -40,6 +43,15 @@ public class FeedMain extends AppCompatActivity
     private List<Exercicio> listExercicio = new ArrayList<Exercicio>();
     private ArrayAdapter<Exercicio> arrayAdapterExercicio;
     private DatabaseReference mDatabase;
+    //    Inicializando campos
+    TextView nomeUsuario;
+    TextView emailUsuario;
+    //    Recuperando dados do sharedPreferences
+    SharedPreferences prefs;
+    String emailLogin;
+    //    Variaveis para o Firebase
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +87,12 @@ public class FeedMain extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //      Recuperando email do usuário logado
+        prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
+        emailLogin = prefs.getString("emailUsuario", "");
+        //      Funções de preenchimento de dados no Feed
+        inicializarFirebase();
+        dadosUsuario(emailLogin);
     }
 
     private void eventoDatabase() {
@@ -159,12 +177,12 @@ public class FeedMain extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseUser user = mAuth.getCurrentUser();
-            if (user != null){
+            if (user != null) {
                 mAuth.signOut();
                 this.finish();
                 Intent it = new Intent(this, MainActivity.class);
                 startActivity(it);
-            }else{
+            } else {
                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
             }
         }
@@ -173,12 +191,53 @@ public class FeedMain extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void irExercicio(View view){
+
+    public void irExercicio(View view) {
         Intent it = new Intent(this, activity_Exercicio.class);
         startActivity(it);
     }
-    public void irGrafico(View view){
+
+    public void irGrafico(View view) {
         Intent it = new Intent(this, GraficosPerfil.class);
         startActivity(it);
     }
+
+    //  FUNÇÕES VOLTADAS PARA CARREGAMENTO DE DADOS
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(FeedMain.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }
+
+    private void dadosUsuario(String emailLogin) {
+        Query consultarUsuario;
+        consultarUsuario = databaseReference.child("Aluno").child("aluno01").child("email")
+                .equalTo("vvao@a.recife.ifpe.edu.br");
+
+        consultarUsuario.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    Aluno aluno = dataSnapshot.getValue(Aluno.class);
+                    preencherNavHeader(aluno.getNome(), aluno.getEmail());
+                    System.out.println("Object User: Email:" + aluno.getEmail());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void preencherNavHeader(String nome, String email) {
+
+        nomeUsuario = (TextView) findViewById(R.id.nomeUsuarioFeed);
+        emailUsuario = (TextView) findViewById(R.id.emailUsuarioFeed);
+
+        nomeUsuario.setText(nome);
+        emailUsuario.setText(email);
+    }
+
+    ;
 }

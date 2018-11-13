@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "852494043331",
-    "firebase_url": "https://personal-tech.firebaseio.com",
-    "project_id": "personal-tech",
-    "storage_bucket": "personal-tech.appspot.com"
+    "project_number": "208718551972",
+    "firebase_url": "https://personaltech-12305.firebaseio.com",
+    "project_id": "personaltech-12305",
+    "storage_bucket": "personaltech-12305.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:852494043331:android:9dfa80fb726ebce2",
+        "mobilesdk_app_id": "1:208718551972:android:9dfa80fb726ebce2",
         "android_client_info": {
           "package_name": "br.edu.ifpe.tads.pt.personaltech"
         }
       },
       "oauth_client": [
         {
-          "client_id": "852494043331-77prils1jajvent592th9uctpfvtcdlb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "br.edu.ifpe.tads.pt.personaltech",
-            "certificate_hash": "730d2bbaf0c15f9a6b5d6abcc4a9d85cef36b2c2"
-          }
-        },
-        {
-          "client_id": "852494043331-24sdp11ivp6c9ajkoggmlafn1e4mrn5g.apps.googleusercontent.com",
+          "client_id": "208718551972-gl4cvpo7vt5g422aosdat33g8arivm5c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAzKz3qsqNkVjukceaxzx7w0WaV1N8VCuo"
+          "current_key": "AIzaSyB99zUoJM9beDvAwg4K76xNIWCxFbpHAbw"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "852494043331-24sdp11ivp6c9ajkoggmlafn1e4mrn5g.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

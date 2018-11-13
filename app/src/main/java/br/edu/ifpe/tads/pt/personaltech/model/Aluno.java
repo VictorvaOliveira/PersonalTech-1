@@ -11,12 +11,12 @@ public class Aluno {
     private String email;
     private String telefone;
 
-    public Aluno(){
+    public Aluno() {
 
     }
 
     public Aluno(int id, String nome, String sexo, String dataNascimento,
-                 String email, String telefone){
+                 String email, String telefone) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;

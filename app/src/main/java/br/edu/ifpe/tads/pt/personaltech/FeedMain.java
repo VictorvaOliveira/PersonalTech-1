@@ -38,7 +38,7 @@ public class FeedMain extends AppCompatActivity
     String emailLogin;
     //    Variaveis para o Firebase
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference mDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,6 @@ public class FeedMain extends AppCompatActivity
         prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
         emailLogin = prefs.getString("emailUsuario", "");
         //      Funções de preenchimento de dados no Feed
-        inicializarCampos();
         inicializarFirebase();
         dadosUsuario(emailLogin);
     }
@@ -150,18 +149,13 @@ public class FeedMain extends AppCompatActivity
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(FeedMain.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabase = firebaseDatabase.getReference();
-    }
-
-    private void inicializarCampos() {
-        nomeUsuario = (TextView) findViewById(R.id.nomeUsuarioFeed);
-        emailUsuario = (TextView) findViewById(R.id.emailUsuarioFeed);
+        databaseReference = firebaseDatabase.getReference();
     }
 
     private void dadosUsuario(String emailLogin) {
         Query consultarUsuario;
-
-        consultarUsuario = mDatabase.child("Aluno").child("email").equalTo(emailLogin);
+        consultarUsuario = databaseReference.child("Aluno").child("aluno01").child("email")
+                .equalTo("vvao@a.recife.ifpe.edu.br");
 
         consultarUsuario.addValueEventListener(new ValueEventListener() {
             @Override
@@ -169,9 +163,9 @@ public class FeedMain extends AppCompatActivity
                 if (dataSnapshot.hasChildren()) {
                     Aluno aluno = dataSnapshot.getValue(Aluno.class);
                     preencherNavHeader(aluno.getNome(), aluno.getEmail());
+                    System.out.println("Object User: Email:" + aluno.getEmail());
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -180,6 +174,10 @@ public class FeedMain extends AppCompatActivity
     }
 
     private void preencherNavHeader(String nome, String email) {
+
+        nomeUsuario = (TextView) findViewById(R.id.nomeUsuarioFeed);
+        emailUsuario = (TextView) findViewById(R.id.emailUsuarioFeed);
+
         nomeUsuario.setText(nome);
         emailUsuario.setText(email);
     }

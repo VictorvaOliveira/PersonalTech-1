@@ -4,7 +4,7 @@ public class Exercicio {
 
     private String nome;
     private String descricao;
-    private String imagemId;
+    private String imagem;
     private String nivel;
     private String tipo;
 
@@ -12,10 +12,10 @@ public class Exercicio {
 
     }
 
-    public Exercicio(String nome, String descricao, String imagemId, String tipo, String nivel){
+    public Exercicio(String nome, String descricao, String imagem, String tipo, String nivel){
         this.nome = nome;
         this.descricao = descricao;
-        this.imagemId = imagemId;
+        this.imagem = imagem;
         this.tipo = tipo;
         this.nivel = nivel;
     }
@@ -36,12 +36,12 @@ public class Exercicio {
         this.descricao = descricao;
     }
 
-    public String getImagemId() {
-        return imagemId;
+    public String getImagem() {
+        return imagem;
     }
 
-    public void setImagemId(String imagemId) {
-        this.imagemId = imagemId;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public String getNivel() {

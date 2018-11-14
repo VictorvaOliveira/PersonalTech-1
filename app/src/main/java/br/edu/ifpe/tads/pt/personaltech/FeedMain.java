@@ -1,9 +1,11 @@
 package br.edu.ifpe.tads.pt.personaltech;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
 
@@ -15,17 +17,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +42,14 @@ import br.edu.ifpe.tads.pt.personaltech.model.Aluno;
 
 public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    // Criei uma LISTVIEW  aleatória por causa da videoaula, se não usar, eu comentarei.
-    ListView lista;
-    //TextView nivel, titulo, tipo;
+
+
     FirebaseDatabase firebaseDatabase ;
-    private List<Exercicio> listExercicio = new ArrayList<Exercicio>();
+
     private ArrayAdapter<Exercicio> arrayAdapterExercicio;
     private DatabaseReference databaseReference;
+    private RecyclerView recyclerView;
+
     //    Inicializando campos
     TextView nomeUsuario;
     TextView emailUsuario;
@@ -56,14 +63,14 @@ public class FeedMain extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // ABAIXO SERÁ A INDEX + VARIAVEL (MARCOS // LEMBRAR QUE É MEU)
-           //nivel = (TextView)findViewById(R.id.NivelExercicio);
-          // titulo = (TextView)findViewById(R.id.AvisoExercicio);
-          // tipo = (TextView)findViewById(R.id.TipoExercicio);
-          lista=(ListView)findViewById(R.id.listaExercicio);
-           inicializarFirebase();
-           eventoDatabase();
-           // FIM DO CÓDIGO DE MARCOS ////
+
+           databaseReference = FirebaseDatabase.getInstance().getReference().child("Exercicio");
+           databaseReference.keepSynced(true);
+           recyclerView=(RecyclerView)findViewById(R.id.myrecycleview);
+           recyclerView.setHasFixedSize(true);
+           recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
 
 
 //        NÃO MEXER DE FORMA ALGUMA NESSE COMENTÁRIO
@@ -88,31 +95,61 @@ public class FeedMain extends AppCompatActivity
         prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
         emailLogin = prefs.getString("emailUsuario", "");
         //      Funções de preenchimento de dados no Feed
-        inicializarFirebase();
+
         dadosUsuario(emailLogin);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseRecyclerAdapter<Exercicio,ExercicioViewHolder>firebaseRecyclerAdapter =new FirebaseRecyclerAdapter<Exercicio,ExercicioViewHolder>
+                (Exercicio.class,R.layout.lista_exercicio,ExercicioViewHolder.class,databaseReference){
+            @Override
+            protected void populateViewHolder(ExercicioViewHolder viewHolder, Exercicio model, int position) {
+                viewHolder.setTitulo(model.getNome());
+                viewHolder.setTipo(model.getTipo());
+                viewHolder.image.setImageBitmap(null);
+                Picasso.with(viewHolder.image.getContext()).load(model.getImagem()).into(viewHolder.image);
 
-
-
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(FeedMain.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+            }
+        };
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
-              /*ABAIXO, METODO DE CREATE DATABASSE (PARA ESTUDO)
-               *
-                *
-                * public boolean createExercicio(){
-                * Exercicio e = new Exercicio();
-                * e.setTitulo("Fulaninho");
-                * e.setTipo("Perna");
-                * e.setNivel("Facil");
-                * mDatabase.child("Exercicio").child(e.getID).setvalue(e);
-                * return true;
-                *
-                * }
-                * */
+    public static class ExercicioViewHolder extends RecyclerView.ViewHolder{
+        View mview;
+        public ImageView image;
+        public ExercicioViewHolder(View itemView){
+               super(itemView);
+               mview=itemView;
+               image = (ImageView)mview.findViewById(R.id.exercicio_imagem);
+        }
+        public void setTitulo(String titulo){
+            TextView tituloExercicio = (TextView)mview.findViewById(R.id.exercicio_titulo);
+            tituloExercicio.setText(titulo);
+        }
+        public void setTipo(String tipo){
+            TextView tipoExercicio = (TextView)mview.findViewById(R.id.exercicio_tipo);
+            tipoExercicio.setText(tipo);
+        }
+        public void setImagem(Context cxt, String imagem){
+            ImageView imagemExercicio = (ImageView) mview.findViewById(R.id.exercicio_imagem);
+            Picasso.with(cxt).load(imagem).into(imagemExercicio);
+        }
+    }
+
+    /*ABAIXO, METODO DE CREATE DATABASSE (PARA ESTUDO)
+     *
+     *
+     * public boolean createExercicio(){
+     * Exercicio e = new Exercicio();
+     * e.setTitulo("Fulaninho");
+     * e.setTipo("Perna");
+     * e.setNivel("Facil");
+     * mDatabase.child("Exercicio").child(e.getID).setvalue(e);
+     * return true;
+     *
+     * }
+     * */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -214,7 +251,8 @@ public class FeedMain extends AppCompatActivity
         nomeUsuario.setText(nome);
         emailUsuario.setText(email);
     }
-    private void eventoDatabase() {
+
+   /* private void eventoDatabase() {
         databaseReference.child("Exercicio").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -234,5 +272,5 @@ public class FeedMain extends AppCompatActivity
         });
 
 
-    }
+    }*/
 }

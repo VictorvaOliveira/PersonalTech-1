@@ -23,8 +23,7 @@
         <activity android:name=".Perfil" />
         <activity android:name=".Configuracao" />
         <activity android:name=".activity_Exercicio" />
-        <activity android:name=".Graficos" />
         <activity android:name=".GraficosPerfil"></activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

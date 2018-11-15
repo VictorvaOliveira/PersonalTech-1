@@ -6,39 +6,37 @@ public class Acompanhamento {
 
     private double peso;
     private double altura;
-    private Date dataAcompanhamento;
-    private int identificadorAluno;
+    private String data;
 
-    public double getPeso() {
-        return peso;
+    public Acompanhamento(){
+
     }
-
-    public void setPeso(double peso) {
+    public Acompanhamento(double altura, String data, double peso){
+        this.altura = altura;
+        this.data = data;
         this.peso = peso;
     }
+    public double getPeso() {
 
+        return peso;
+    }
+    public void setPeso(double peso) {
+
+        this.peso = peso;
+    }
     public double getAltura() {
+
         return altura;
     }
-
     public void setAltura(double altura) {
+
         this.altura = altura;
     }
-
-    public Date getDataAcompanhamento() {
-        return dataAcompanhamento;
+    public String getData() {
+        return data;
     }
-
-    public void setDataAcompanhamento(Date dataAcompanhamento) {
-        this.dataAcompanhamento = dataAcompanhamento;
-    }
-
-    public int getIdentificadorAluno() {
-        return identificadorAluno;
-    }
-
-    public void setIdentificadorAluno(int identificadorAluno) {
-        this.identificadorAluno = identificadorAluno;
+    public void setData(String data) {
+        this.data = data;
     }
 }
 

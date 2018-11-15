@@ -9,6 +9,11 @@
             android:icon="@drawable/icon_person"
             android:title="Dados pessoais" />
         <item
+            android:id="@+id/nav_acompanhamento"
+            android:icon="@drawable/baseline_bar"
+            android:title="Acompanhamento"
+            />
+        <item
             android:id="@+id/nav_configuracao"
             android:icon="@drawable/icon_settings"
             android:title="Configurações" />

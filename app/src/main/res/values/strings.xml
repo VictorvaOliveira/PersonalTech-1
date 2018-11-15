@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">PersonalTech</string>
+    <string name="app_name">Personal Tech</string>
     <string name="Login_email">Digite seu email</string>
     <string name="Login_password">Digite sua senha</string>
     <string name="botao_login">Logar</string>
-    <string name="title_activity_feed_main">FeedMain</string>
+    <string name="title_activity_feed_main">Personal Tech</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_configuracao">Settings</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_configuracao">Configurações</string>
 
     <!-- Strings related to Settings -->
 
@@ -91,7 +91,7 @@
     <string name="PesoPerfil">Peso: 53.7 </string>
     <string name="AlturaPerfil">Altura: 1.70</string>
     <string name="PressaoPerfil">Pressão: 13 por 9</string>
-    <string name="AvisoGrafico">Gráfico Peso/IMC</string>
+    <string name="AvisoGrafico"></string>
     <string name="AvisoExercicio">Exercícios</string>
     <string name="Nivel">Nível: Iniciante</string>
     <string name="TempoMedio">Tempo médio: 5 minutos</string>

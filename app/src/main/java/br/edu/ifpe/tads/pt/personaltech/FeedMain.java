@@ -49,7 +49,7 @@ public class FeedMain extends AppCompatActivity
     private ArrayAdapter<Exercicio> arrayAdapterExercicio;
     private DatabaseReference databaseReference;
     private RecyclerView recyclerView;
-
+    public Exercicio exercicio = new Exercicio();
     //    Inicializando campos
     TextView nomeUsuario;
     TextView emailUsuario;
@@ -105,12 +105,28 @@ public class FeedMain extends AppCompatActivity
         FirebaseRecyclerAdapter<Exercicio,ExercicioViewHolder>firebaseRecyclerAdapter =new FirebaseRecyclerAdapter<Exercicio,ExercicioViewHolder>
                 (Exercicio.class,R.layout.lista_exercicio,ExercicioViewHolder.class,databaseReference){
             @Override
-            protected void populateViewHolder(ExercicioViewHolder viewHolder, Exercicio model, int position) {
+            protected void populateViewHolder(final ExercicioViewHolder viewHolder, Exercicio model, int position) {
                 viewHolder.setTitulo(model.getNome());
                 viewHolder.setTipo(model.getTipo());
                 viewHolder.image.setImageBitmap(null);
                 Picasso.with(viewHolder.image.getContext()).load(model.getImagem()).into(viewHolder.image);
-
+                exercicio.setNome(model.getNome()) ;
+                exercicio.setDescricao(model.getDescricao());
+                exercicio.setNivel(model.getNivel());
+                exercicio.setTipo(model.getTipo());
+                exercicio.setImagem(model.getImagem());
+              viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      Intent intent = new Intent(getApplicationContext(),activity_Exercicio.class);
+                      intent.putExtra("exercicioNome",exercicio.getNome());
+                      intent.putExtra("exercicioDescricao",exercicio.getDescricao());
+                      intent.putExtra("exercicioTipo",exercicio.getTipo());
+                      intent.putExtra("exercicioNivel",exercicio.getNivel());
+                      intent.putExtra("exercicioImagem",exercicio.getImagem());
+                      startActivity(intent);
+                  }
+              });
             }
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
@@ -252,25 +268,5 @@ public class FeedMain extends AppCompatActivity
         emailUsuario.setText(email);
     }
 
-   /* private void eventoDatabase() {
-        databaseReference.child("Exercicio").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listExercicio.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Exercicio e = objSnapshot.getValue(Exercicio.class);
-                    listExercicio.add(e);
-                }
-                arrayAdapterExercicio = new ArrayAdapter<Exercicio>(FeedMain.this,android.R.layout.simple_list_item_1,listExercicio);
-                lista.setAdapter(arrayAdapterExercicio);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }*/
 }

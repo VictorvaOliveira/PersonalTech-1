@@ -13,7 +13,7 @@
         android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_marginLeft="100dp"
-
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="5dp"
 
         android:fontFamily="sans-serif"
@@ -29,7 +29,7 @@
         android:id="@+id/Descricao_Exercicio"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="10dp"
 
 
@@ -50,7 +50,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/grafico"
+            android:id="@+id/imagemExercicio"
             android:layout_width="match_parent"
             android:layout_height="184dp"
             android:layout_marginTop="03dp"
@@ -67,7 +67,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="00dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="00dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
@@ -76,6 +76,7 @@
                 android:id="@+id/chronometer1"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center"
@@ -90,6 +91,7 @@
                 android:layout_height="60dp"
                 android:onClick="StopChronometer"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/ic_pause"/></LinearLayout>
 

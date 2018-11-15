@@ -58,6 +58,6 @@ public class Exercicio {
 
     @Override
     public String toString() {
-        return nome;
+        return nome+descricao+imagem+nivel+tipo;
     }
 }

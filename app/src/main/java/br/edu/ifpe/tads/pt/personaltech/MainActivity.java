@@ -20,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText email, pswd;
     private String emailDeLogin;
     SharedPreferences.Editor editor;
-
+    SharedPreferences prefs;
+    String emailLogin;
+    View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void autenticacaoUsuario(final View view) {
         final String login = email.getText().toString();
-        String senha = pswd.getText().toString();
+        final String senha = pswd.getText().toString();
+        final String logado = "sim";
 
         mAuth.signInWithEmailAndPassword(login, senha)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             editor.putString("emailUsuario", login);
+                            editor.putString("senha", senha);
+                            editor.putString("logado", "1");
                             editor.commit();
                             mudarTela(view);
                         } else {
@@ -69,5 +74,4 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(this, FeedMain.class);
         startActivity(it);
     }
-
 }

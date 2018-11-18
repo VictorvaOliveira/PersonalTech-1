@@ -29,6 +29,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.edu.ifpe.tads.pt.personaltech.model.Acompanhamento;
 import br.edu.ifpe.tads.pt.personaltech.model.Aluno;
 import br.edu.ifpe.tads.pt.personaltech.model.Exercicio;
 
@@ -49,6 +53,10 @@ public class FeedMain extends AppCompatActivity
     //    Recuperando dados do sharedPreferences
     SharedPreferences prefs;
     String emailLogin;
+    Aluno aluno;
+
+    private List<Aluno> listAluno = new ArrayList<>();
+    private ArrayAdapter<Aluno> arrayAdapteraluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +91,12 @@ public class FeedMain extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //      Recuperando email do usuário logado
-        prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
+        prefs = getSharedPreferences("INFO_USUARIO", MODE_PRIVATE);
         emailLogin = prefs.getString("emailUsuario", "");
         //      Funções de preenchimento de dados no Feed
 
-        dadosUsuario(emailLogin);
+//        dadosUsuario(emailLogin);
+        dadosUsuario();
     }
 
     @Override
@@ -163,26 +172,30 @@ public class FeedMain extends AppCompatActivity
      * }
      * */
 
-    private void dadosUsuario(String emailLogin) {
-        System.out.println("Method dadosUsuario: Email de login = " + emailLogin);
-        Query consultaUsuario = databaseReferenceAluno.orderByChild("email")
-                .equalTo(emailLogin).limitToFirst(1);
-        consultaUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Aluno aluno;
-                    aluno = dataSnapshot.getValue(Aluno.class);
-                    System.out.println("DataSnapShot:" + dataSnapshot);
-//                    System.out.println("Object User: Email:" + aluno.getEmail());
-                }
-            }
+//    private void dadosUsuario(String emailLogin) {
+    private void dadosUsuario(){
+//        System.out.println("Method dadosUsuario: Email de login = " + emailLogin);
+        databaseReferenceAluno.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        listAluno.clear();
+//                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot obj : dataSnapshot.getChildren()) {
+                                aluno = dataSnapshot.getValue(Aluno.class);
+                                System.out.println("DataSnapShot:" + dataSnapshot);
+                                System.out.println("Object User: Email:" + aluno.getEmail());
+                                listAluno.add(aluno);
+                            }
+//                        }
+                        arrayAdapteraluno = new ArrayAdapter<Aluno>(FeedMain.this,
+                                android.R.layout.simple_list_item_1, listAluno);
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("Error on method dadosUsuario:" + databaseError);
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        System.out.println("Error on method dadosUsuario:" + databaseError);
+                    }
+                });
     }
 
     private void preencherNavHeader(String nome, String email) {
@@ -249,6 +262,9 @@ public class FeedMain extends AppCompatActivity
             if (user != null) {
                 mAuth.signOut();
                 this.finish();
+                SharedPreferences.Editor prefs = getSharedPreferences("INFO_USUARIO", 0).edit();
+                prefs.clear();
+                prefs.commit();
                 Intent it = new Intent(this, MainActivity.class);
                 startActivity(it);
             } else {

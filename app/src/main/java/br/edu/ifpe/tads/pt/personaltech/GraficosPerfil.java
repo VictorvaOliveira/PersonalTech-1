@@ -89,8 +89,9 @@ public class GraficosPerfil extends AppCompatActivity {
                 listAcompanhamento.clear();
                 for (DataSnapshot obj : dataSnapshot.getChildren()) {
                     Acompanhamento acomp = obj.getValue(Acompanhamento.class);
-                    System.out.println("Acompanhamento:" + acomp.getPeso());
-                    listAcompanhamento.add(acomp);
+                    if(acomp.getPeso() < 72) {
+                        System.out.println("Acompanhamento:" + acomp.getPeso());
+                    }listAcompanhamento.add(acomp);
                 }
                 arrayAdapteracompanhamento = new ArrayAdapter<Acompanhamento>(GraficosPerfil.this,
                         android.R.layout.simple_list_item_1, listAcompanhamento);

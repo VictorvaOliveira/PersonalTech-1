@@ -52,8 +52,7 @@ public class FeedMain extends AppCompatActivity
     TextView emailUsuario;
     //    Recuperando dados do sharedPreferences
     SharedPreferences prefs;
-    String emailLogin;
-    Aluno aluno;
+    public String emailLogin;
 
     private List<Aluno> listAluno = new ArrayList<>();
     private ArrayAdapter<Aluno> arrayAdapteraluno;
@@ -68,6 +67,7 @@ public class FeedMain extends AppCompatActivity
         databaseReferenceAluno = FirebaseDatabase.getInstance().getReference().child("Aluno");
         databaseReferenceAluno.keepSynced(true);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Exercicio");
+
         databaseReference.keepSynced(true);
         recyclerView = (RecyclerView) findViewById(R.id.myrecycleview);
         recyclerView.setHasFixedSize(true);
@@ -91,7 +91,7 @@ public class FeedMain extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //      Recuperando email do usuário logado
-        prefs = getSharedPreferences("INFO_USUARIO", MODE_PRIVATE);
+        prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
         emailLogin = prefs.getString("emailUsuario", "");
         //      Funções de preenchimento de dados no Feed
 
@@ -103,7 +103,7 @@ public class FeedMain extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         FirebaseRecyclerAdapter<Exercicio, ExercicioViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Exercicio, ExercicioViewHolder>
-                (Exercicio.class, R.layout.lista_exercicio, ExercicioViewHolder.class, databaseReference) {
+                (Exercicio.class, R.layout.lista_exercicio, ExercicioViewHolder.class, databaseReference.orderByChild("nivel").equalTo("facil")) {
             @Override
             protected void populateViewHolder(final ExercicioViewHolder viewHolder, Exercicio model, int position) {
                 viewHolder.setTitulo(model.getNome());
@@ -172,20 +172,28 @@ public class FeedMain extends AppCompatActivity
      * }
      * */
 
-//    private void dadosUsuario(String emailLogin) {
-    private void dadosUsuario(){
-//        System.out.println("Method dadosUsuario: Email de login = " + emailLogin);
-        databaseReferenceAluno.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void dadosUsuario() {
+//    private void dadosUsuario(){
+        System.out.println("Method dadosUsuario: Email de login = " + emailLogin);
+        databaseReferenceAluno.orderByChild("email").equalTo(emailLogin).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         listAluno.clear();
 //                        if (dataSnapshot.exists()) {
                             for (DataSnapshot obj : dataSnapshot.getChildren()) {
-                                aluno = dataSnapshot.getValue(Aluno.class);
+                                Aluno aluno = dataSnapshot.getValue(Aluno.class);
+//                                if (aluno.getEmail() == "vvao@a.recife.ifpe.edu.br"){
                                 System.out.println("DataSnapShot:" + dataSnapshot);
-                                System.out.println("Object User: Email:" + aluno.getEmail());
-                                listAluno.add(aluno);
+
+                               listAluno.add(aluno);
+//                                }
+
                             }
+                        System.out.println("Object User: Nome:" + listAluno.get(0).getNome());
+                        System.out.println("Object User: D:" + listAluno.get(0).getDataNascimento());
+                        System.out.println("Object User: N:" + listAluno.get(0).getNivel());
+                        System.out.println("Object User: S:" + listAluno.get(0).getSexo());
+
 //                        }
                         arrayAdapteraluno = new ArrayAdapter<Aluno>(FeedMain.this,
                                 android.R.layout.simple_list_item_1, listAluno);
@@ -253,9 +261,9 @@ public class FeedMain extends AppCompatActivity
             startActivity(it);
         } else if (id == R.id.nav_acompanhamento) {
 //            INTENT PARA ACIONAR A ATIVIDADE DE GRÁFICO
-//            Intent it = new Intent(this, GraficosPerfil.class);
-//            startActivity(it);
-            Toast.makeText(this, "Funcionalidade em construção", Toast.LENGTH_LONG).show();
+            Intent it = new Intent(this, GraficosPerfil.class);
+            startActivity(it);
+//            Toast.makeText(this, "Funcionalidade em construção", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_logout) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseUser user = mAuth.getCurrentUser();

@@ -37,9 +37,21 @@
             android:textSize="18sp" />
 
         <TimePicker
+            android:id="@+id/relogioConf"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:headerBackground="@color/colorPrimary"
             android:numbersSelectorColor="@color/colorPrimary" />
+
+
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Agendar"
+        android:onClick="scheduleAlarm"
+        android:textColor="@color/white"
+        />
+
 </LinearLayout>

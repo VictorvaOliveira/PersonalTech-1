@@ -96,7 +96,7 @@ public class FeedMain extends AppCompatActivity
         //      Funções de preenchimento de dados no Feed
 
 //        dadosUsuario(emailLogin);
-        dadosUsuario();
+       // dadosUsuario();
     }
 
     @Override
@@ -172,7 +172,7 @@ public class FeedMain extends AppCompatActivity
      * }
      * */
 
-    private void dadosUsuario() {
+   /* private void dadosUsuario() {
 //    private void dadosUsuario(){
         System.out.println("Method dadosUsuario: Email de login = " + emailLogin);
         databaseReferenceAluno.orderByChild("email").equalTo(emailLogin).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -204,7 +204,7 @@ public class FeedMain extends AppCompatActivity
                         System.out.println("Error on method dadosUsuario:" + databaseError);
                     }
                 });
-    }
+    }*/
 
     private void preencherNavHeader(String nome, String email) {
 

@@ -6,8 +6,11 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 
 public class AlarmeExercicio extends BroadcastReceiver {
+
+
     @Override
     public void onReceive(Context context, Intent intent)
     {
@@ -24,6 +27,7 @@ public class AlarmeExercicio extends BroadcastReceiver {
         builder.setSmallIcon(R.drawable.notificacaoimagem);
         builder.setContentText("Bora exercitar!");
         builder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+        builder.setColor(context.getResources().getColor(R.color.colorPrimary));
         builder.setContentIntent(pendingNotificationIntent);
         builder.setAutoCancel(true);
         Notification notification = builder.build();

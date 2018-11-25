@@ -20,21 +20,25 @@
     android:textStyle="bold"
     tools:layout_editor_absoluteX="73dp"
     tools:layout_editor_absoluteY="14dp" />
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="50dp">
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:orientation="vertical">
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="32dp">
+
             <TextView
-                android:id="@+id/PesoPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="Peso:"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/pesoPerfil"
+                android:layout_width="331dp"
+                android:layout_height="30dp"
                 android:fontFamily="sans-serif"
-                android:hint="@string/PesoPerfil"
                 android:paddingLeft="30dip"
                 android:paddingRight="26dip"
                 android:textColor="@color/black"
@@ -42,13 +46,26 @@
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="78dp"
                 tools:layout_editor_absoluteY="73dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="87dp">
 
             <TextView
-                android:id="@+id/AlturaPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="31dp"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="Altura:"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/alturaPerfil"
+                android:layout_width="331dp"
+                android:layout_height="30dp"
                 android:fontFamily="sans-serif"
-                android:hint="@string/AlturaPerfil"
                 android:paddingLeft="30dip"
                 android:paddingRight="26dip"
                 android:textColor="@color/black"
@@ -56,53 +73,49 @@
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="78dp"
                 tools:layout_editor_absoluteY="132dp" />
-
-            <TextView
-                android:id="@+id/pressaoPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Última avaliação: 15/11/2018"
-                android:paddingLeft="30dip"
-                android:paddingRight="26dip"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="78dp"
-                tools:layout_editor_absoluteY="191dp" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-    <!--<TextView-->
-        <!--android:id="@+id/AvisoGrafico"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="45dp"-->
-        <!--android:layout_marginTop="15dp"-->
-        <!--android:layout_marginLeft="70dp"-->
-        <!--android:fontFamily="sans-serif"-->
-        <!--android:hint="@string/AvisoGrafico"-->
-        <!--android:paddingLeft="30dip"-->
-        <!--android:paddingRight="26dip"-->
-        <!--android:textColor="@color/black"-->
-        <!--android:textSize="20sp"-->
-        <!--android:textStyle="bold"-->
-        <!--tools:layout_editor_absoluteX="73dp"-->
-        <!--tools:layout_editor_absoluteY="14dp" />-->
-    <!--<LinearLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="match_parent"-->
 
-        <!--android:gravity="center_vertical">-->
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="157dp">
 
-        <!--<com.jjoe64.graphview.GraphView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="200dip"-->
-            <!--android:id="@+id/graph" />-->
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="Data:"
+            android:textSize="18sp" />
 
-    <!--</LinearLayout>-->
+        <TextView
+            android:id="@+id/dataAvaliacaoPerfil"
+            android:layout_width="331dp"
+            android:layout_height="30dp"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="78dp"
+            tools:layout_editor_absoluteY="191dp" />
+    </LinearLayout>
 
-    <WebView
-        android:id="@+id/wvGrafico"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"></WebView>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+
+        android:gravity="center_vertical">
+
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/graph" />
+
+    </LinearLayout>
 
 </LinearLayout>
+
+<!--ids-->
+    <!--pesoPerfil, alturaPerfil, dataAvaliacaoPerfil-->

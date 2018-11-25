@@ -54,6 +54,7 @@ public class FeedMain extends AppCompatActivity
     SharedPreferences prefs;
     public String emailLogin;
 
+    public Aluno aluno;
     private List<Aluno> listAluno = new ArrayList<>();
     private ArrayAdapter<Aluno> arrayAdapteraluno;
 
@@ -96,7 +97,7 @@ public class FeedMain extends AppCompatActivity
         //      Funções de preenchimento de dados no Feed
 
 //        dadosUsuario(emailLogin);
-       // dadosUsuario();
+        dadosUsuario();
     }
 
     @Override
@@ -172,39 +173,39 @@ public class FeedMain extends AppCompatActivity
      * }
      * */
 
-   /* private void dadosUsuario() {
-//    private void dadosUsuario(){
+    private void dadosUsuario() {
         System.out.println("Method dadosUsuario: Email de login = " + emailLogin);
-        databaseReferenceAluno.orderByChild("email").equalTo(emailLogin).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        listAluno.clear();
+        databaseReferenceAluno.child("aluno01").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listAluno.clear();
 //                        if (dataSnapshot.exists()) {
-                            for (DataSnapshot obj : dataSnapshot.getChildren()) {
-                                Aluno aluno = dataSnapshot.getValue(Aluno.class);
+                for (DataSnapshot obj : dataSnapshot.getChildren()) {
+                    Aluno aluno = dataSnapshot.getValue(Aluno.class);
 //                                if (aluno.getEmail() == "vvao@a.recife.ifpe.edu.br"){
-                                System.out.println("DataSnapShot:" + dataSnapshot);
+                    System.out.println("DataSnapShot:" + dataSnapshot);
 
-                               listAluno.add(aluno);
+                    listAluno.add(aluno);
 //                                }
-
-                            }
-                        System.out.println("Object User: Nome:" + listAluno.get(0).getNome());
-                        System.out.println("Object User: D:" + listAluno.get(0).getDataNascimento());
-                        System.out.println("Object User: N:" + listAluno.get(0).getNivel());
-                        System.out.println("Object User: S:" + listAluno.get(0).getSexo());
+                }
+                System.out.println("Object User: Nome:" + listAluno.get(0).getNome());
+                System.out.println("Object User: D:" + listAluno.get(0).getDataNascimento());
+                System.out.println("Object User: N:" + listAluno.get(0).getNivel());
+                System.out.println("Object User: S:" + listAluno.get(0).getSexo());
 
 //                        }
-                        arrayAdapteraluno = new ArrayAdapter<Aluno>(FeedMain.this,
-                                android.R.layout.simple_list_item_1, listAluno);
-                    }
+                arrayAdapteraluno = new ArrayAdapter<Aluno>(FeedMain.this,
+                        android.R.layout.simple_list_item_1, listAluno);
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        System.out.println("Error on method dadosUsuario:" + databaseError);
-                    }
-                });
-    }*/
+                preencherNavHeader(listAluno.get(0).getNome(), listAluno.get(0).getEmail());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("Error on method dadosUsuario:" + databaseError);
+            }
+        });
+    }
 
     private void preencherNavHeader(String nome, String email) {
 
@@ -252,7 +253,6 @@ public class FeedMain extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_perfil) {
             Intent it = new Intent(this, Perfil.class);
             startActivity(it);

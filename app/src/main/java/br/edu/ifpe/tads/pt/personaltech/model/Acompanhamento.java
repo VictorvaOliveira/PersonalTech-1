@@ -1,40 +1,45 @@
 package br.edu.ifpe.tads.pt.personaltech.model;
 
-import java.util.Date;
-
 public class Acompanhamento {
 
-    private double peso;
-    private double altura;
+    private int peso;
+    private int altura;
     private String data;
 
-    public Acompanhamento(){
+    public Acompanhamento() {
 
     }
-    public Acompanhamento(double altura, String data, double peso){
+
+    public Acompanhamento(int altura, String data, int peso) {
         this.altura = altura;
         this.data = data;
         this.peso = peso;
     }
-    public double getPeso() {
+
+    public int getPeso() {
 
         return peso;
     }
-    public void setPeso(double peso) {
+
+    public void setPeso(int peso) {
 
         this.peso = peso;
     }
-    public double getAltura() {
+
+    public int getAltura() {
 
         return altura;
     }
-    public void setAltura(double altura) {
+
+    public void setAltura(int altura) {
 
         this.altura = altura;
     }
+
     public String getData() {
         return data;
     }
+
     public void setData(String data) {
         this.data = data;
     }

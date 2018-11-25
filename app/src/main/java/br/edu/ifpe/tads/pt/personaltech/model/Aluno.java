@@ -7,7 +7,7 @@ public class Aluno {
     private String nivel;
     private String nome;
     private String sexo;
-    private String telefone;
+    private int telefone;
 
 
     public Aluno(){
@@ -15,7 +15,7 @@ public class Aluno {
     }
 
     public Aluno(String dataNascimento, String email, String nivel
-            , String nome, String sexo, String telefone){
+            , String nome, String sexo, int telefone){
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.nivel = nivel;
@@ -63,11 +63,11 @@ public class Aluno {
         this.sexo = sexo;
     }
 
-    public String getTelefone() {
+    public int getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
     @Override

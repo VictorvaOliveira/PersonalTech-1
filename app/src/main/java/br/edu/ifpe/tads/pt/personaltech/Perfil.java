@@ -28,8 +28,8 @@ public class Perfil extends AppCompatActivity {
     String emailLogin;
 
     TextView nomePerfil;
-    EditText emailPerfil;
-    EditText telefonePerfil;
+    TextView emailPerfil;
+    TextView telefonePerfil;
 
     private List<Aluno> listAluno = new ArrayList<>();
     private ArrayAdapter<Aluno> arrayAdapteraluno;
@@ -86,8 +86,8 @@ public class Perfil extends AppCompatActivity {
 
     public void preencherEditText(String nome, String email, int telefone) {
         nomePerfil = (TextView) findViewById(R.id.nomePerfil);
-        emailPerfil = (EditText) findViewById(R.id.emailPerfil);
-        telefonePerfil = (EditText) findViewById(R.id.telefonePerfil);
+        emailPerfil = (TextView) findViewById(R.id.emailPerfil);
+        telefonePerfil = (TextView) findViewById(R.id.telefonePerfil);
 
         nomePerfil.setText(nome);
         emailPerfil.setText(email);

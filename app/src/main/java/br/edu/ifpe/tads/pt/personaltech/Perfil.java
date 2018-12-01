@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,7 @@ public class Perfil extends AppCompatActivity {
 
     FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    private FirebaseUser user;
 
     Aluno aluno;
 
@@ -50,27 +53,19 @@ public class Perfil extends AppCompatActivity {
 
         prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
         emailLogin = prefs.getString("emailUsuario", "");
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         dadosUsuario();
 
     }
 
     private void dadosUsuario() {
-        databaseReference.child("aluno01").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listAluno.clear();
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot obj : dataSnapshot.getChildren()) {
-                        Aluno aluno = dataSnapshot.getValue(Aluno.class);
-//                                if (aluno.getEmail() == "vvao@a.recife.ifpe.edu.br"){
-                        System.out.println("DataSnapShot Perfil:" + dataSnapshot);
-                        listAluno.add(aluno);
-                    }
-                }
+                Aluno aluno = dataSnapshot.getValue(Aluno.class);
 //                        }
-                preencherEditText(listAluno.get(0).getNome(), listAluno.get(0).getEmail(),
-                listAluno.get(0).getTelefone());
+                preencherEditText(aluno.getNome(),aluno.getEmail(),
+                aluno.getTelefone());
             }
 
             @Override

@@ -40,6 +40,7 @@ public class FeedMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //    FIREBASE
+    private FirebaseUser user;
     private DatabaseReference databaseReference;
     private DatabaseReference databaseReferenceAluno;
     FirebaseDatabase firebaseDatabase;
@@ -94,6 +95,7 @@ public class FeedMain extends AppCompatActivity
         //      Recuperando email do usuário logado
         prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
         emailLogin = prefs.getString("emailUsuario", "");
+        user = FirebaseAuth.getInstance().getCurrentUser();
         //      Funções de preenchimento de dados no Feed
 
 //        dadosUsuario(emailLogin);
@@ -174,30 +176,13 @@ public class FeedMain extends AppCompatActivity
      * */
 
     private void dadosUsuario() {
-        System.out.println("Method dadosUsuario: Email de login = " + emailLogin);
-        databaseReferenceAluno.child("aluno01").addListenerForSingleValueEvent(new ValueEventListener() {
+        System.out.println("Identificador usuário:" + user.getUid());
+        databaseReferenceAluno.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listAluno.clear();
-//                        if (dataSnapshot.exists()) {
-                for (DataSnapshot obj : dataSnapshot.getChildren()) {
-                    Aluno aluno = dataSnapshot.getValue(Aluno.class);
-//                                if (aluno.getEmail() == "vvao@a.recife.ifpe.edu.br"){
-                    System.out.println("DataSnapShot:" + dataSnapshot);
-
-                    listAluno.add(aluno);
-//                                }
-                }
-                System.out.println("Object User: Nome:" + listAluno.get(0).getNome());
-                System.out.println("Object User: D:" + listAluno.get(0).getDataNascimento());
-                System.out.println("Object User: N:" + listAluno.get(0).getNivel());
-                System.out.println("Object User: S:" + listAluno.get(0).getSexo());
-
-//                        }
-                arrayAdapteraluno = new ArrayAdapter<Aluno>(FeedMain.this,
-                        android.R.layout.simple_list_item_1, listAluno);
-
-                preencherNavHeader(listAluno.get(0).getNome(), listAluno.get(0).getEmail());
+//                'Setando' aluno recuperado no banco na classe
+                Aluno aluno  = dataSnapshot.getValue(Aluno.class);
+                preencherNavHeader(aluno.getNome(), aluno.getEmail());
             }
 
             @Override

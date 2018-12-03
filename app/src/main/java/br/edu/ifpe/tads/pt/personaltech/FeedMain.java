@@ -55,7 +55,7 @@ public class FeedMain extends AppCompatActivity
     SharedPreferences prefs;
     public String emailLogin;
 
-    public Aluno aluno;
+    public static Aluno aluno;
     private List<Aluno> listAluno = new ArrayList<>();
     private ArrayAdapter<Aluno> arrayAdapteraluno;
 
@@ -66,8 +66,6 @@ public class FeedMain extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        databaseReferenceAluno = FirebaseDatabase.getInstance().getReference().child("Aluno");
-        databaseReferenceAluno.keepSynced(true);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Exercicio");
 
         databaseReference.keepSynced(true);
@@ -83,7 +81,6 @@ public class FeedMain extends AppCompatActivity
 //                        .setAction("Action", null).show();
 //            }
 //        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -96,17 +93,62 @@ public class FeedMain extends AppCompatActivity
         prefs = getSharedPreferences("EMAIL_LOGIN", MODE_PRIVATE);
         emailLogin = prefs.getString("emailUsuario", "");
         user = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReferenceAluno = FirebaseDatabase.getInstance().getReference().child("Aluno").child(user.getUid());
+        databaseReferenceAluno.keepSynced(true);
         //      Funções de preenchimento de dados no Feed
-
-//        dadosUsuario(emailLogin);
         dadosUsuario();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    //    @Override
+//    protected void onStart() {
+//        super.onStart();
+    /*ABAIXO, METODO DE CREATE DATABASSE (PARA ESTUDO)
+     *
+     *
+     * public boolean createExercicio(){
+     * Exercicio e = new Exercicio();
+     * e.setTitulo("Fulaninho");
+     * e.setTipo("Perna");
+     * e.setNivel("Facil");
+     * mDatabase.child("Exercicio").child(e.getID).setvalue(e);
+     * return true;
+     *
+     * }
+     * */
+
+    private void dadosUsuario() {
+        System.out.println("Identificador usuário:" + user.getUid());
+        databaseReferenceAluno.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                'Setando' aluno recuperado no banco na classe
+                aluno = dataSnapshot.getValue(Aluno.class);
+                if (aluno != null){
+                    preencherNavHeader(aluno.getNome(), aluno.getEmail());
+                    Exercicio(aluno);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("Error on method dadosUsuario:" + databaseError);
+            }
+        });
+    }
+
+    private void preencherNavHeader(String nome, String email) {
+
+        nomeUsuario = (TextView) findViewById(R.id.nomeUsuarioFeed);
+        emailUsuario = (TextView) findViewById(R.id.emailUsuarioFeed);
+
+        nomeUsuario.setText(nome);
+        emailUsuario.setText(email);
+    }
+
+    protected void Exercicio(Aluno aluno) {
+
         FirebaseRecyclerAdapter<Exercicio, ExercicioViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Exercicio, ExercicioViewHolder>
-                (Exercicio.class, R.layout.lista_exercicio, ExercicioViewHolder.class, databaseReference.orderByChild("nivel").equalTo("facil")) {
+                (Exercicio.class, R.layout.lista_exercicio, ExercicioViewHolder.class, databaseReference.orderByChild("nivel").equalTo(aluno.getNivel())) {
             @Override
             protected void populateViewHolder(final ExercicioViewHolder viewHolder, Exercicio model, int position) {
                 viewHolder.setTitulo(model.getNome());
@@ -159,46 +201,6 @@ public class FeedMain extends AppCompatActivity
             ImageView imagemExercicio = (ImageView) mview.findViewById(R.id.exercicio_imagem);
             Picasso.with(cxt).load(imagem).into(imagemExercicio);
         }
-    }
-
-    /*ABAIXO, METODO DE CREATE DATABASSE (PARA ESTUDO)
-     *
-     *
-     * public boolean createExercicio(){
-     * Exercicio e = new Exercicio();
-     * e.setTitulo("Fulaninho");
-     * e.setTipo("Perna");
-     * e.setNivel("Facil");
-     * mDatabase.child("Exercicio").child(e.getID).setvalue(e);
-     * return true;
-     *
-     * }
-     * */
-
-    private void dadosUsuario() {
-        System.out.println("Identificador usuário:" + user.getUid());
-        databaseReferenceAluno.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                'Setando' aluno recuperado no banco na classe
-                Aluno aluno  = dataSnapshot.getValue(Aluno.class);
-                preencherNavHeader(aluno.getNome(), aluno.getEmail());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("Error on method dadosUsuario:" + databaseError);
-            }
-        });
-    }
-
-    private void preencherNavHeader(String nome, String email) {
-
-        nomeUsuario = (TextView) findViewById(R.id.nomeUsuarioFeed);
-        emailUsuario = (TextView) findViewById(R.id.emailUsuarioFeed);
-
-        nomeUsuario.setText(nome);
-        emailUsuario.setText(email);
     }
 
     @Override
